@@ -11,24 +11,27 @@
 //-------------------------------------------------------
 
 #define DEVICE_HAS_SINGLE_LED_RGB
+
+#define USE_DEBUG
 // #define DEVICE_HAS_NO_DEBUG
-#define DEVICE_HAS_SERIAL_OR_DEBUG
+// #define DEVICE_HAS_SERIAL_OR_DEBUG
+// #define DEVICE_HAS_SERIAL_ON_USB
 
 
 //-- UARTS
 // UARTB = serial port
-// UART = output port, SBus or whatever
-// UARTF = debug port
+// UARTC = debug port
 
 
-#define UARTB_USE_SERIAL1
+#define UARTB_USE_SERIAL2
 #define UARTB_BAUD                RX_SERIAL_BAUDRATE
-#define UARTB_TXBUFSIZE           RX_SERIAL_TXBUFSIZE
-#define UARTB_RXBUFSIZE           RX_SERIAL_RXBUFSIZE
+#define UARTB_USE_TX_IO           43
+#define UARTB_USE_RX_IO           44
 
-#define UARTF_USE_SERIAL2
+#define UARTF_USE_SERIAL
 #define UARTF_BAUD                115200
-
+#define UARTF_USE_TX_IO           37
+#define UARTF_USE_RX_IO           36
 
 //-- SX1: SX12xx & SPI
 
@@ -37,20 +40,22 @@
 #define SPI_MISO                  IO_P13
 #define SPI_MOSI                  IO_P11
 #define SPI_SCK                   IO_P12
-#define SX_RESET                  IO_P42
-#define SX_DIO0                   IO_P39
-#define SX_BUSY                   IO_P40
+
+#define SX_RESET                  IO_P7
+#define SX_DIO1                   IO_P5
+#define SX_BUSY                   IO_P6
+#define SX_RX_EN                  IO_P16
+#define SX_TX_EN                  IO_P17
 
 IRQHANDLER(void SX_DIO_EXTI_IRQHandler(void);)
 
 void sx_init_gpio(void)
 {
-    gpio_init(SX_DIO0, IO_MODE_INPUT_ANALOG);
-    gpio_init(SX_BUSY, IO_MODE_INPUT_PU);
     gpio_init(SX_RESET, IO_MODE_OUTPUT_PP_HIGH);
-
-    // // Fake ground for serial
-    // gpio_init(14, IO_MODE_OUTPUT_PP_LOW);
+    gpio_init(SX_DIO1, IO_MODE_INPUT_ANALOG);
+    gpio_init(SX_BUSY, IO_MODE_INPUT_PU);
+    gpio_init(SX_TX_EN, IO_MODE_OUTPUT_PP_LOW);
+    gpio_init(SX_RX_EN, IO_MODE_OUTPUT_PP_LOW);
 }
 
 IRAM_ATTR bool sx_busy_read(void)
@@ -58,13 +63,26 @@ IRAM_ATTR bool sx_busy_read(void)
     return (gpio_read_activehigh(SX_BUSY)) ? true : false;
 }
 
-IRAM_ATTR void sx_amp_transmit(void) {}
-IRAM_ATTR void sx_amp_receive(void) {}
-void sx_dio_init_exti_isroff(void) {}
+void sx_amp_transmit(void)
+{
+    gpio_low(SX_RX_EN);
+    gpio_high(SX_TX_EN);
+}
+
+void sx_amp_receive(void)
+{
+    gpio_low(SX_TX_EN);
+    gpio_high(SX_RX_EN);
+}
+
+void sx_dio_init_exti_isroff(void)
+{
+    detachInterrupt(SX_DIO1);
+}
 
 void sx_dio_enable_exti_isr(void)
 {
-    attachInterrupt(SX_DIO0, SX_DIO_EXTI_IRQHandler, RISING);
+    attachInterrupt(SX_DIO1, SX_DIO_EXTI_IRQHandler, RISING);
 }
 
 IRAM_ATTR void sx_dio_exti_isr_clearflag(void) {}
