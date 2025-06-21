@@ -53,6 +53,14 @@
   #define FREQUENCY_BAND_915_MHZ_FCC
 #endif
 
+#ifdef RX_E22_S3_N16R8V_ESP32S3
+  #define DEVICE_NAME "E22 S3 N16R8V"
+  #define DEVICE_IS_RECEIVER
+  #define DEVICE_HAS_SX126x
+  #define FREQUENCY_BAND_868_MHZ
+  #define FREQUENCY_BAND_915_MHZ_FCC
+#endif
+
 //-- Generic 868/915 MHz ELRS devices with overlays or other variations
 
 #ifdef RX_ELRS_RADIOMASTER_BR3_900_ESP8285

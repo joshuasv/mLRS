@@ -171,6 +171,10 @@ void _uart_initit(uint32_t baud, UARTPARITYENUM parity, UARTSTOPBITENUM stopbits
     UART_SERIAL_NO.setRxBufferSize(UART_RXBUFSIZE);
     UART_SERIAL_NO.begin(baud);
 #endif
+
+#ifdef ESP32S3
+    UART_SERIAL_NO.begin(baud);
+#endif
 }
 
 

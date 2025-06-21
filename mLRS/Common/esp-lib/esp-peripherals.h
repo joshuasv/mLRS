@@ -48,6 +48,15 @@
 #define IO_P37      37
 #define IO_P38      38
 #define IO_P39      39
+#define IO_P40      40 // ESP32S3
+#define IO_P41      41
+#define IO_P42      42
+#define IO_P43      43
+#define IO_P44      44
+#define IO_P45      45
+#define IO_P46      46
+#define IO_P47      47
+#define IO_P48      48
 
 
 typedef enum {
