@@ -95,7 +95,7 @@ void spi_init(void)
 #elif defined ESP8266
     SPI.begin();
 #endif
-    SPI.setFrequency(SPI_FREQUENCY);
+    // SPI.setFrequency(SPI_FREQUENCY);
     SPI.setBitOrder(SPI_MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
 }

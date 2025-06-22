@@ -36,7 +36,7 @@
 //-- SX1: SX12xx & SPI
 
 #define SPI_CS_IO                 IO_P10
-#define SPI_FREQUENCY             10000000L
+// #define SPI_FREQUENCY             10000000L
 #define SPI_MISO                  IO_P13
 #define SPI_MOSI                  IO_P11
 #define SPI_SCK                   IO_P12
@@ -184,5 +184,17 @@ IRAM_ATTR void led_blue_toggle(void)
 
 //-- POWER
 
-#define POWER_PA_NONE_SX126X
-#include "../hal-power-pa.h"
+#define POWER_GAIN_DBM            0 // gain of a PA stage if present
+#define POWER_SX126X_MAX_DBM      SX126X_POWER_MAX // maximum allowed sx power
+#define POWER_USE_DEFAULT_RFPOWER_CALC
+
+#define RFPOWER_DEFAULT           2 // index into rfpower_list array
+
+const rfpower_t rfpower_list[] = {
+    { .dbm = POWER_MIN, .mW = INT8_MIN },
+    { .dbm = POWER_0_DBM, .mW = 1 },
+    { .dbm = POWER_10_DBM, .mW = 10 },
+    { .dbm = POWER_14_DBM, .mW = 25 },
+    { .dbm = POWER_20_DBM, .mW = 100 },
+    { .dbm = POWER_22_DBM, .mW = 158 },
+};
