@@ -608,7 +608,7 @@ INITCONTROLLER_END
 
         if (!tick_1hz) {
             dbg.puts(".");
-/*            dbg.puts("\nRX: ");
+            dbg.puts("\nRX: ");
             dbg.puts(u8toBCD_s(stats.GetLQ_rc())); dbg.putc(',');
             dbg.puts(u8toBCD_s(stats.GetLQ_serial()));
             dbg.puts(" (");
@@ -623,7 +623,7 @@ INITCONTROLLER_END
             dbg.puts(s8toBCD_s(stats.last_snr1)); dbg.puts("; ");
 
             dbg.puts(u16toBCD_s(stats.bytes_transmitted.GetBytesPerSec())); dbg.puts(", ");
-            dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; "); */
+            dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; ");
         }
     }
 
@@ -636,6 +636,8 @@ INITCONTROLLER_END
         }
         sx.SetRfFrequency(fhss.GetCurrFreq());
         sx2.SetRfFrequency(fhss.GetCurrFreq2());
+        Serial.print("fhss.GetCurrFreq()=");
+        Serial.println(fhss.GetCurrFreq());
         IF_ANTENNA1(sx.SetToRx(0)); // single without tmo
         IF_ANTENNA2(sx2.SetToRx(0));
         link_state = LINK_STATE_RECEIVE_WAIT;

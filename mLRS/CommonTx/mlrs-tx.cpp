@@ -825,7 +825,7 @@ INITCONTROLLER_END
 
             if (!tick_1hz) {
                 dbg.puts(".");
-/*                dbg.puts("\nTX: ");
+                dbg.puts("\nTX: ");
                 dbg.puts(u8toBCD_s(stats.GetLQ_serial()));
                 dbg.puts("(");
                 dbg.puts(u8toBCD_s(stats.frames_received.GetLQ())); dbg.putc(',');
@@ -838,7 +838,7 @@ INITCONTROLLER_END
                 dbg.puts(s8toBCD_s(stats.last_snr1)); dbg.puts("; ");
 
                 dbg.puts(u16toBCD_s(stats.bytes_transmitted.GetBytesPerSec())); dbg.puts(", ");
-                dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; "); */
+                dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; ");
             }
         } // end of if (!doPreTransmit)
     }
@@ -881,6 +881,15 @@ INITCONTROLLER_END
         DBG_MAIN_SLIM(dbg.puts("r");)
         break;
     }//end of switch(link_state)
+
+// Serial.println("### TX START ###");
+// Serial.print("connect_state=");
+// Serial.println(connect_state);
+// Serial.print("link_state=");
+// Serial.println(link_state);
+// Serial.print("irq_status=");
+// Serial.println(irq_status);
+// Serial.println("### TX END ###");
 
 IF_SX(
     if (irq_status) {

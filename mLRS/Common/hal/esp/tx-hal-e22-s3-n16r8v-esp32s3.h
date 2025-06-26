@@ -11,11 +11,9 @@
 //-------------------------------------------------------
 
 #define DEVICE_HAS_SINGLE_LED_RGB
+#define DEVICE_HAS_NO_COM
 
 #define USE_DEBUG
-// #define DEVICE_HAS_NO_DEBUG
-// #define DEVICE_HAS_SERIAL_OR_DEBUG
-// #define DEVICE_HAS_SERIAL_ON_USB
 
 // SX1262 has the following connections:
 // NSS pin:   10
@@ -28,6 +26,7 @@
 // miso:    13
 // mosi:    11
 // ss:      10
+
 
 //-- UARTS
 // UARTB = serial port
@@ -42,6 +41,7 @@
 #define UARTF_BAUD                115200
 #define UARTF_USE_TX_IO           37
 #define UARTF_USE_RX_IO           36
+#define UARTF_TXBUFSIZE           0 // ?? // 512
 
 //-- SX1: SX12xx & SPI
 
@@ -100,7 +100,7 @@ IRAM_ATTR void sx_dio_exti_isr_clearflag(void) {}
 
 //-- Button
 
-#define BUTTON                    IO_P9
+#define BUTTON                    IO_P0
 
 void button_init(void)
 {

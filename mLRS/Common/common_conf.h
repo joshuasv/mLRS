@@ -36,7 +36,7 @@
 // user can modify them to their liking
 
 // un-comment to force setup to the below defines, else setup is taken from EEPROM
-//#define SETUP_FORCE_COMMON_CONF
+#define SETUP_FORCE_COMMON_CONF
 
 
 #define CPOWER                          RFPOWER_DEFAULT
@@ -91,9 +91,10 @@
 #define BIND_PHRASE                     "mlrs.0" // string of 6 characters, allowed are 'a'-'z','0'-'9','_','-','#','.'
 
 
-#define SETUP_MODE                      MODE_50HZ
+// #define SETUP_MODE                      MODE_50HZ
 //#define SETUP_MODE                      MODE_31HZ
 //#define SETUP_MODE                      MODE_19HZ
+#define SETUP_MODE                      MODE_FSK_50HZ    
 
 
 //#define SETUP_RF_BAND                    SETUP_FREQUENCY_BAND_915_MHZ_FCC

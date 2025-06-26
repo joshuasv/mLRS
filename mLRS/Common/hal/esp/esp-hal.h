@@ -37,6 +37,15 @@
 #include "rx-hal-e22-s3-n16r8v-esp32s3.h"
 #endif
 
+#ifdef RX_E22_ESP32
+#include "rx-hal-e22-esp32.h"
+#endif
+
+#ifdef TX_E22_S3_N16R8V_ESP32S3
+#include "tx-hal-e22-s3-n16r8v-esp32s3.h"
+#endif
+
+
 //-- Generic 868/915 MHz ELRS devices with overlays or other variations
 
 #ifdef RX_ELRS_RADIOMASTER_BR3_900_ESP8285
@@ -147,8 +156,7 @@
 #endif
 
 #ifdef RX_DIY_DEV_900_ESP32
-// #include "rx-hal-diy-dev-900-esp32.h"
-#include "rx-hal-diy-dev-900-esp32-s3.h"
+#include "rx-hal-diy-dev-900-esp32.h"
 #endif
 
 

@@ -144,6 +144,21 @@ void tBindBase::Do(void)
 {
     uint32_t tnow = millis32();
 
+    Serial.println("### BINDING START ###");
+    Serial.print("is_in_binding="); // is in sync with link loop
+    Serial.println(is_in_binding); // is in sync with link loop
+    Serial.print("binding_requested=");
+    Serial.println(binding_requested);
+    Serial.print("binding_stop_requested=");
+    Serial.println(binding_stop_requested);
+    Serial.print("button_tlast_ms=");
+    Serial.println(button_tlast_ms);
+    Serial.print("task=");
+    Serial.println(task);
+    Serial.print("is_connected=");
+    Serial.println(is_connected);
+    Serial.println("### BINDING END ###");
+
     if (is_pressed) {
         if (tnow - button_tlast_ms > BIND_BUTTON_TMO_MS) {
             binding_requested = true;
