@@ -13,18 +13,13 @@
 #define DEVICE_HAS_NO_COM
 #define DEVICE_HAS_SINGLE_LED_RGB
 
-// #define USE_DEBUG
-// #define DEVICE_HAS_NO_DEBUG
-// #define DEVICE_HAS_SERIAL_OR_DEBUG
-// #define DEVICE_HAS_SERIAL_ON_USB
 
 //-- UARTS
 // UARTB = serial port
-// UARTC = debug port
-
+// UARTF = debug port
 
 #define UARTB_USE_SERIAL2
-#define UARTB_BAUD                RX_SERIAL_BAUDRATE
+#define UARTB_BAUD                115200
 #define UARTB_USE_TX_IO           43
 #define UARTB_USE_RX_IO           44
 
@@ -36,7 +31,7 @@
 //-- SX1: SX12xx & SPI
 
 #define SPI_CS_IO                 IO_P10
-#define SPI_FREQUENCY             10000000L
+#define SPI_FREQUENCY             18000000L
 #define SPI_MISO                  IO_P13
 #define SPI_MOSI                  IO_P11
 #define SPI_SCK                   IO_P12
@@ -51,9 +46,9 @@ IRQHANDLER(void SX_DIO_EXTI_IRQHandler(void);)
 
 void sx_init_gpio(void)
 {
-    gpio_init(SX_RESET, IO_MODE_OUTPUT_PP_HIGH);
+    gpio_init(SX_RESET, IO_MODE_OUTPUT_PP_LOW);
     gpio_init(SX_DIO1, IO_MODE_INPUT_ANALOG);
-    gpio_init(SX_BUSY, IO_MODE_INPUT_PU);
+    gpio_init(SX_BUSY, IO_MODE_INPUT_ANALOG);
     gpio_init(SX_TX_EN, IO_MODE_OUTPUT_PP_LOW);
     gpio_init(SX_RX_EN, IO_MODE_OUTPUT_PP_LOW);
 }
