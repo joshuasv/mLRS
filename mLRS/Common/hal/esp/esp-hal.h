@@ -107,6 +107,10 @@
 #include "tx-hal-e22-s3-n16r8v-esp32s3.h"
 #endif
 
+#ifdef RX_E22_ESP32
+#include "rx-hal-e22-esp32.h"
+#endif
+
 #ifdef TX_ELRS_RADIOMASTER_RP4TD_2400_ESP32
 #include "tx-hal-radiomaster-rp4td-2400-esp32.h"
 #endif
