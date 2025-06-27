@@ -14,7 +14,7 @@
 #define DEVICE_HAS_SINGLE_LED
 //#define DEVICE_HAS_NO_DEBUG
 #define DEVICE_HAS_SERIAL_OR_DEBUG
-#define USE_DEBUG
+// #define USE_DEBUG
 
 
 //-- UARTS
@@ -123,21 +123,21 @@ IRAM_ATTR void led_red_toggle(void) { gpio_toggle(LED_RED); }
 
 //-- POWER
 
-#define POWER_PA_NONE_SX126X
-#define SX_USE_PA_CONFIG_10_DBM
-#include "../hal-power-pa.h"
+// #define POWER_PA_NONE_SX126X
+// #define SX_USE_PA_CONFIG_10_DBM
+// #include "../hal-power-pa.h"
 
-// #define POWER_GAIN_DBM            0 // gain of a PA stage if present
-// #define POWER_SX126X_MAX_DBM      SX126X_POWER_MAX // maximum allowed sx power
-// #define POWER_USE_DEFAULT_RFPOWER_CALC
+#define POWER_GAIN_DBM            24 // gain of a PA stage if present
+#define POWER_SX126X_MAX_DBM      SX126X_POWER_MAX // maximum allowed sx power
+#define POWER_USE_DEFAULT_RFPOWER_CALC
 
-// #define RFPOWER_DEFAULT           2 // index into rfpower_list array
+#define RFPOWER_DEFAULT           0 // index into rfpower_list array
 
-// const rfpower_t rfpower_list[] = {
-//     { .dbm = POWER_MIN, .mW = INT8_MIN },
-//     { .dbm = POWER_0_DBM, .mW = 1 },
-//     { .dbm = POWER_10_DBM, .mW = 10 },
-//     { .dbm = POWER_14_DBM, .mW = 25 },
-//     { .dbm = POWER_20_DBM, .mW = 100 },
-//     { .dbm = POWER_22_DBM, .mW = 158 },
-// };
+const rfpower_t rfpower_list[] = {
+    { .dbm = POWER_MIN, .mW = INT8_MIN },
+    { .dbm = POWER_0_DBM, .mW = 1 },
+    { .dbm = POWER_10_DBM, .mW = 10 },
+    { .dbm = POWER_14_DBM, .mW = 25 },
+    { .dbm = POWER_20_DBM, .mW = 100 },
+    { .dbm = POWER_22_DBM, .mW = 158 },
+};

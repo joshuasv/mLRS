@@ -608,22 +608,24 @@ INITCONTROLLER_END
 
         if (!tick_1hz) {
             dbg.puts(".");
-            dbg.puts("\nRX: ");
-            dbg.puts(u8toBCD_s(stats.GetLQ_rc())); dbg.putc(',');
-            dbg.puts(u8toBCD_s(stats.GetLQ_serial()));
-            dbg.puts(" (");
-            dbg.puts(u8toBCD_s(stats.frames_received.GetLQ())); dbg.putc(',');
-            dbg.puts(u8toBCD_s(stats.valid_crc1_received.GetLQ())); dbg.putc(',');
-            dbg.puts(u8toBCD_s(stats.valid_frames_received.GetLQ()));
-            dbg.puts("),");
-            dbg.puts(u8toBCD_s(stats.received_LQ_serial)); dbg.puts(", ");
+            // dbg.puts("\nRX: ");
+            // dbg.puts(u8toBCD_s(stats.GetLQ_rc())); dbg.putc(',');
+            // dbg.puts(u8toBCD_s(stats.GetLQ_serial()));
+            // dbg.puts(" (");
+            // dbg.puts(u8toBCD_s(stats.frames_received.GetLQ())); dbg.putc(',');
+            // dbg.puts(u8toBCD_s(stats.valid_crc1_received.GetLQ())); dbg.putc(',');
+            // dbg.puts(u8toBCD_s(stats.valid_frames_received.GetLQ()));
+            // dbg.puts("),");
+            // dbg.puts(u8toBCD_s(stats.received_LQ_serial)); dbg.puts(", ");
 
-            dbg.puts(s8toBCD_s(stats.last_rssi1)); dbg.putc(',');
-            dbg.puts(s8toBCD_s(stats.received_rssi)); dbg.puts(", ");
-            dbg.puts(s8toBCD_s(stats.last_snr1)); dbg.puts("; ");
+            // dbg.puts(s8toBCD_s(stats.last_rssi1)); dbg.putc(',');
+            // dbg.puts(s8toBCD_s(stats.received_rssi)); dbg.puts(", ");
+            // dbg.puts(s8toBCD_s(stats.last_snr1)); dbg.puts("; ");
 
-            dbg.puts(u16toBCD_s(stats.bytes_transmitted.GetBytesPerSec())); dbg.puts(", ");
-            dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; ");
+            // dbg.puts(u16toBCD_s(stats.bytes_transmitted.GetBytesPerSec())); dbg.puts(", ");
+            // dbg.puts(u16toBCD_s(stats.bytes_received.GetBytesPerSec())); dbg.puts("; ");
+            // dbg.puts("mlrs-rx::main_loop::link_state="); dbg.puts(u8toBCD_s(link_state)); dbg.puts("\n");
+            // dbg.puts("mlrs-rx::main_loop::connect_state="); dbg.puts(u8toBCD_s(connect_state));dbg.puts("\n");
         }
     }
 
@@ -636,8 +638,6 @@ INITCONTROLLER_END
         }
         sx.SetRfFrequency(fhss.GetCurrFreq());
         sx2.SetRfFrequency(fhss.GetCurrFreq2());
-        Serial.print("fhss.GetCurrFreq()=");
-        Serial.println(fhss.GetCurrFreq());
         IF_ANTENNA1(sx.SetToRx(0)); // single without tmo
         IF_ANTENNA2(sx2.SetToRx(0));
         link_state = LINK_STATE_RECEIVE_WAIT;
@@ -821,6 +821,12 @@ dbg.puts(s8toBCD_s(stats.last_rssi2));*/
                     connect_state = CONNECT_STATE_CONNECTED;
                     connect_occured_once = true;
                 }
+                // Serial.print("connect_sync_cnt_max=");
+                // Serial.println(connect_sync_cnt_max);
+                // Serial.print("connect_sync_cnt=");
+                // Serial.println(connect_sync_cnt);
+                // Serial.print("connect_fhss_index_band_seen=");
+                // Serial.println(connect_fhss_index_band_seen );
                 break;
             }
             connect_tmo_cnt = CONNECT_TMO_SYSTICKS;

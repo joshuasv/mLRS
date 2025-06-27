@@ -13,7 +13,7 @@
 #define DEVICE_HAS_SINGLE_LED_RGB
 #define DEVICE_HAS_NO_COM
 
-#define USE_DEBUG
+// #define USE_DEBUG
 
 // SX1262 has the following connections:
 // NSS pin:   10
@@ -115,12 +115,12 @@ IRAM_ATTR bool button_pressed(void)
 
 //-- LEDs
 #include <NeoPixelBus.h>
-#define LED_RED                    IO_P48
+#define LED_RGB                   IO_P48
 bool ledRedState;
 bool ledGreenState;
 bool ledBlueState;
 
-NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> ledRGB(1, LED_RED);
+NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> ledRGB(1, LED_RGB);
 
 void leds_init(void)
 {
@@ -194,20 +194,17 @@ IRAM_ATTR void led_blue_toggle(void)
 
 //-- POWER
 
-#define POWER_PA_NONE_SX126X
-#include "../hal-power-pa.h"
+#define POWER_GAIN_DBM            0 // gain of a PA stage if present
+#define POWER_SX126X_MAX_DBM      SX126X_POWER_MAX // maximum allowed sx power
+#define POWER_USE_DEFAULT_RFPOWER_CALC
 
-// #define POWER_GAIN_DBM            0 // gain of a PA stage if present
-// #define POWER_SX126X_MAX_DBM      SX126X_POWER_MAX // maximum allowed sx power
-// #define POWER_USE_DEFAULT_RFPOWER_CALC
+#define RFPOWER_DEFAULT           0 // index into rfpower_list array
 
-// #define RFPOWER_DEFAULT           2 // index into rfpower_list array
-
-// const rfpower_t rfpower_list[] = {
-//     { .dbm = POWER_MIN, .mW = INT8_MIN },
-//     { .dbm = POWER_0_DBM, .mW = 1 },
-//     { .dbm = POWER_10_DBM, .mW = 10 },
-//     { .dbm = POWER_14_DBM, .mW = 25 },
-//     { .dbm = POWER_20_DBM, .mW = 100 },
-//     { .dbm = POWER_22_DBM, .mW = 158 },
-// };
+const rfpower_t rfpower_list[] = {
+    { .dbm = POWER_MIN, .mW = INT8_MIN },
+    { .dbm = POWER_0_DBM, .mW = 1 },
+    { .dbm = POWER_10_DBM, .mW = 10 },
+    { .dbm = POWER_14_DBM, .mW = 25 },
+    { .dbm = POWER_20_DBM, .mW = 100 },
+    { .dbm = POWER_22_DBM, .mW = 158 },
+};
