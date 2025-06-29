@@ -11,20 +11,22 @@
 //-------------------------------------------------------
 
 #define DEVICE_HAS_SINGLE_LED
-#define DEVICE_HAS_SERIAL_OR_DEBUG
+
+// #define DEVICE_HAS_SERIAL_OR_DEBUG
+#define DEVICE_HAS_NO_DEBUG         // board has no Debug port
 
 
 //-- UARTS
 // UARTB = serial port
 // UARTF = debug port
 
-#define UARTB_USE_SERIAL1
-#define UARTB_BAUD                RX_SERIAL_BAUDRATE
+#define UARTB_USE_SERIAL2
+#define UARTB_BAUD                57600
 #define UARTB_TXBUFSIZE           RX_SERIAL_TXBUFSIZE
 #define UARTB_RXBUFSIZE           RX_SERIAL_RXBUFSIZE
 
-#define UARTF_USE_SERIAL
-#define UARTF_BAUD                115200
+// #define UARTF_USE_SERIAL
+// #define UARTF_BAUD                115200
 
 #define SPI_CS_IO                 IO_P18
 #define SPI_FREQUENCY             10000000L
@@ -34,7 +36,7 @@
 
 #define SX_RESET                  IO_P14
 #define SX_DIO1                   IO_P26
-#define SX_BUSY                   IO_P17
+#define SX_BUSY                   IO_P2
 #define SX_RX_EN                  IO_P21
 #define SX_TX_EN                  IO_P4
 
@@ -44,7 +46,7 @@ void sx_init_gpio(void)
 {
     gpio_init(SX_RESET, IO_MODE_OUTPUT_PP_LOW);
     gpio_init(SX_DIO1, IO_MODE_INPUT_ANALOG);
-    gpio_init(SX_BUSY, IO_MODE_INPUT_PU);
+    gpio_init(SX_BUSY, IO_MODE_INPUT_ANALOG);
     gpio_init(SX_TX_EN, IO_MODE_OUTPUT_PP_LOW);
     gpio_init(SX_RX_EN, IO_MODE_OUTPUT_PP_LOW);
 }

@@ -10,8 +10,9 @@
 // ESP32, E22 S3 N16R8 RX
 //-------------------------------------------------------
 
-#define DEVICE_HAS_NO_COM
-#define DEVICE_HAS_SINGLE_LED_RGB
+#define USE_SERIAL
+#define DEVICE_HAS_NO_DEBUG         // board has no Debug port
+#define DEVICE_HAS_NO_COM           // board has no Com port
 
 
 //-- UARTS
@@ -19,28 +20,33 @@
 // UARTF = debug port
 
 #define UARTB_USE_SERIAL2
-#define UARTB_BAUD                115200
-#define UARTB_USE_TX_IO           43
-#define UARTB_USE_RX_IO           44
+#define UARTB_BAUD                57600
+// #define UARTB_USE_TX_IO           43
+// #define UARTB_USE_RX_IO           44
+#define UARTB_USE_TX_IO           20
+#define UARTB_USE_RX_IO           19
 
-#define UARTF_USE_SERIAL
-#define UARTF_BAUD                115200
-#define UARTF_USE_TX_IO           37
-#define UARTF_USE_RX_IO           36
+
+// #define UARTC_USE_SERIAL
+// #define UARTC_BAUD                115200
+// #define UARTF_USE_TX_IO           37
+// #define UARTF_USE_RX_IO           36
+// #define UARTF_TXBUFSIZE           0
 
 //-- SX1: SX12xx & SPI
 
 #define SPI_CS_IO                 IO_P10
-#define SPI_FREQUENCY             18000000L
 #define SPI_MISO                  IO_P13
 #define SPI_MOSI                  IO_P11
 #define SPI_SCK                   IO_P12
-
+#define SPI_FREQUENCY             18000000L
 #define SX_RESET                  IO_P42
 #define SX_DIO1                   IO_P39
 #define SX_BUSY                   IO_P40
 #define SX_RX_EN                  IO_P16
 #define SX_TX_EN                  IO_P17
+
+#define SX_USE_REGULATOR_MODE_DCDC
 
 IRQHANDLER(void SX_DIO_EXTI_IRQHandler(void);)
 
