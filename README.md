@@ -132,3 +132,9 @@ In case of issues with the procedures, don't hesitate to join the discussion thr
 You find many more information here:
 
 [mLRS Documentation](https://github.com/olliw42/mLRS-docu/blob/main/README.md)
+
+## MissionPlanner configuration ##
+
+Change the stream rates of `SR1...` to the values of the column:
+
+https://github.com/olliw42/mLRS-docu/blob/main/docs/CRSF.md#stream-rates
